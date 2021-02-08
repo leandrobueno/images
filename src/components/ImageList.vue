@@ -1,24 +1,31 @@
 <template>
-    <div>ImageList Form
-
-    {{ allImages.length }}
+  <div>
+    <div v-if="isLoggedIn" class="image-container">
+      <img v-for="image in allImages" :key="image.id" :src="image.link" />
     </div>
-
+    <h2 v-else>Log in to get started</h2>
+  </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters } from "vuex";
 export default {
-    name: 'ImageList',
-    computed: mapGetters(['allImages']),
-    methods: mapActions(['fecthImages']),
-    created() {
-        this.fecthImages();
-    }
-    
-}
+  name: "ImageList",
+  computed: mapGetters(["allImages", "isLoggedIn"]),
+  methods: mapActions(["fecthImages"]),
+  created() {
+    this.fecthImages();
+  },
+};
 </script>
 
 <style scoped>
-
+.image-container {
+  column-count: 3;
+  column-gap: 0;
+}
+img {
+  max-width: 100%;
+  padding: 5px;
+}
 </style>
